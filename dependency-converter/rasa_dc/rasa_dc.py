@@ -41,6 +41,7 @@ def get_hardcoded(platform: str, rasa_version: str) -> dict:
                 "sanic": "==21.6.0",
                 "Sanic-Cors": "==1.0.0",
                 "sanic-routing": "==0.7.0",
+                "transformers": "==2.1.0",
             },
             "uncomment": ["tensorflow", "tensorflow-text", "tensorflow-addons"],
             "channels": ["conda-forge", "noarch"],
@@ -65,6 +66,7 @@ def get_hardcoded(platform: str, rasa_version: str) -> dict:
                 "tensorflow-macos": "==2.6.0",
                 "tensorflow-metal": None,
                 "tfa-nightly": None,
+                "transformers": "==2.1.0",
             },
             "uncomment": [
                 "tensorflow",
