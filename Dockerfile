@@ -7,13 +7,17 @@ ARG GID=1000
 ARG CONDA_ENV_NAME="rasa"
 ARG CONDA_ENV="$HOME/.conda/envs/$CONDA_ENV_NAME"
 ARG PYTHON_VERSION="3.8"
+ARG DEBIAN_FRONTEND=noninteractive
 
-FROM condaforge/miniforge3:latest as conda
+FROM condaforge/miniforge3:latest AS conda
+
+ENV TZ=Europe/Berlin
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # install bazel to build dm-tree
 # from https://github.com/KumaTea/tensorflow-aarch64/blob/docker/docker/py38/Dockerfile
 RUN apt-get update \
-    && apt-get install build-essential -y \
+    && apt-get install build-essential cmake -y \
     && cd /tmp \
     && wget https://github.com/bazelbuild/bazel/releases/download/3.7.2/bazel-3.7.2-linux-arm64 \
     && chmod +x /tmp/bazel-3.7.2-linux-arm64 \
@@ -65,7 +69,7 @@ ENV LD_PRELOAD=/usr/lib/aarch64-linux-gnu/libgomp.so.1
 # install Rasa without dependencies
 RUN pip install --no-deps rasa==${RASA_VERSION}
 
-FROM ubuntu:20.04 as runner
+FROM ubuntu:20.04 AS runner
 
 # use global variables
 ARG USER
