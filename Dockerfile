@@ -7,10 +7,10 @@ ARG GID=1000
 ARG CONDA_ENV_NAME="rasa"
 ARG CONDA_ENV="$HOME/.conda/envs/$CONDA_ENV_NAME"
 ARG PYTHON_VERSION="3.8"
-ARG DEBIAN_FRONTEND=noninteractive
 
 FROM condaforge/miniforge3:latest AS conda
 
+# set time zone
 ENV TZ=Europe/Berlin
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
