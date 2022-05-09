@@ -11,7 +11,7 @@ docker build \
     .
 
 docker build \
-    -t "fritzt0/rasa-aarch64:${RASA_VERSION}" \
-    -t "fritzt0/rasa-aarch64:latest" \
+    -t "frmevis/rasa-aarch64:${RASA_VERSION}" \
+    -t "frmevis/rasa-aarch64:latest" \
     --build-arg RASA_VERSION=${RASA_VERSION} \
     .
